@@ -1,6 +1,4 @@
-use std::io::{self, stdin};
-
-
+use std::io::stdin;
 
 fn main() {
     println!("Welcome to the CLI calculator");
@@ -9,21 +7,28 @@ fn main() {
     let b = get_number("Enter second number :");
     let operator = get_string("Enter the operator (+, -, *, /) :");
 
-
     match calculate(a,b,&operator){
         Ok(result) => println!("Result : {result}"),
         Err(e) => println!("Error : {e}"),
     }
-
 }
 
-fn get_number(message: &str) -> f64{//why reference of str?
-    loop{ // why loop?
+/*WHY THE &str
+
+we need a reference otherwise the ownership of the message gets transfered and dropped at the end of the functions scope.
+*/
+fn get_number(message: &str) -> f64{
+    loop{       
+        /*WHY THE "!"?
+
+        because println! is a macro, because it takes in a variable ammount of arguments
+
+        macros in Rust are not the same as in C/C++. They actually generate safe code in Rust at compilation.  
+         */
         println!("{}",message);
 
         let mut input = String::new();
-        stdin().read_line(&mut input).expect("Reading error");//what is this?
-
+        stdin().read_line(&mut input).expect("Reading error");
 
         match input.trim().parse::<f64>(){
             Ok(n) => return n,
@@ -33,11 +38,15 @@ fn get_number(message: &str) -> f64{//why reference of str?
 }
 
 
+
+/*WHY NO RETURN?
+
+if there is no ";" and the last line, same as return*/
 fn get_string(message: &str) -> String {
     println!("{}", message);
 
     let mut input = String::new();
-    io::stdin().read_line(&mut input).expect("Reading error");
+    stdin().read_line(&mut input).expect("Reading error");
 
     input.trim().to_string()
 }
@@ -54,6 +63,13 @@ fn calculate(a: f64, b:f64, op: &str) -> Result<f64, String> {
                 Ok(a/b)
             }
         }
-        _ => Err(format!("non recognized operator : {}",op)),//why exclamation?
+        /*WHAT IS FORMAT!()?
+        
+        returns a string
+        
+        WHAT IS "_"? 
+        
+        in a match, _ is a wildcard (default in switch case)*/
+        _ => Err(format!("non recognized operator : {}",op)),
     }
 }
