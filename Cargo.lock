@@ -3,9 +3,16 @@
 version = 4
 
 [[package]]
+name = "Project1"
+version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "9a6fbf54a81095144aac46a24e1841630d9a9188c6f16ca33342c5334b504198"
+
+[[package]]
 name = "RustProjects"
 version = "0.1.0"
 dependencies = [
+ "Project1",
  "io",
 ]
 
