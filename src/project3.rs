@@ -16,6 +16,12 @@ pub fn project3(){
 
         print!("Choice : ");
 
+
+        /*flush empties the stdout buffer
+        
+        WHAT IS UNWRAP?
+        
+        panic if flush() fails */
         io::stdout().flush().unwrap();
 
         let mut input = String::new();
@@ -45,6 +51,12 @@ pub fn project3(){
                 io::stdin().read_line(&mut index).unwrap();
 
                 if let Ok(i) = index.trim().parse::<usize>(){
+
+                    /*WHAT IS GET_MUT
+                    
+                    method used to get a mutable reference to an element inside a container
+                    
+                    modify the element in place without removing or copying it*/
                     if let Some(task) = tasks.get_mut(i-1){
                         task.complete();
                     }else{
