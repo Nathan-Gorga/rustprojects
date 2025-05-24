@@ -11,7 +11,9 @@ pub fn calculate_median(data: &mut [f64]) -> Option<f64> {
     if len == 0 {
         return None;
     }
-
+    /*WHAT IS |a,b|
+    
+    closure function takes in 2 elements to compare */
     data.sort_by(|a,b| a.partial_cmp(b).unwrap());
 
     Some(if len % 2 == 0 {

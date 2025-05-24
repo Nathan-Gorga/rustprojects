@@ -10,7 +10,9 @@ use stats::{calculate_mean, calculate_median};
 struct Record{
     value: f64,
 }
+/*WHAT IS BOX?
 
+smart pointer (std::unique_ptr)*/
 pub fn project4(path: String) -> Result<(), Box<dyn std::error::Error>>{
     let mut rdr = Reader::from_path(path)?;
     let mut values = Vec::new();
